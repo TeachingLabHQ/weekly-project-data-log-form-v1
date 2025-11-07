@@ -8,6 +8,7 @@ import Col from "react-bootstrap/esm/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Spinner from "react-bootstrap/Spinner";
+import Modal from "react-bootstrap/Modal";
 import DatePicker from "react-datepicker";
 import Select from "react-select";
 import "../App.css";
@@ -75,6 +76,7 @@ function FormPage() {
   const [capCheck, setCapCheck] = useState();
   const [nameCheck, setNameCheck] = useState();
   const [orgUpdate, setOrgUpdate] = useState([]);
+  const [showDeprecatedModal, setShowDeprecatedModal] = useState(true);
   const randomIdx = Math.floor(Math.random() * 4);
   const openModal = true;
    
@@ -581,6 +583,31 @@ function FormPage() {
 
   return (
     <div className="formAll">
+      <Modal
+        show={showDeprecatedModal}
+        onHide={() => setShowDeprecatedModal(false)}
+        backdrop="static"
+        keyboard={false}
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>New Submission Hub</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          We&apos;ve moved weekly project logging to the TL Form Hub. Please use
+          the new form going forward—this legacy form is now deprecated.
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="primary"
+            href="https://tl-form-hub.vercel.app/weekly-project-log-form"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Open TL Form Hub
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <div className="formSection">
         <Form
           className="formBlock"
