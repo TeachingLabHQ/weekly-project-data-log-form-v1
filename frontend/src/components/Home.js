@@ -1,26 +1,17 @@
 import axios from "axios";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import React, { useContext, useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import '../App.css';
 import { AccessTokenContext } from "../contexts/accessTokenContext";
-import app from "../firebase/firebase";
 
 
 function Home() {
-    const authentication = getAuth(app);
     const[info, setInfo] = useState([])
     const[lessons,setLessons] = useState([])
     const{accessToken, setAccessToken} = useContext(AccessTokenContext)
     let query = '{ boards (ids:2783211671) {name id  items {name column_values {title value text type} } } }';
 
     useEffect(() =>{
-        fetch("http://localhost:9000/demo/info?myParam=10")
-        .then((res)=>res.json())
-        .then((res)=>console.log(res))
-        .then((text)=>setInfo(text.result))
-        .catch((err)=>console.log(err))
-
         setAccessToken("eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjE2NTYwODI0MSwidWlkIjozMTI4ODQ0NCwiaWFkIjoiMjAyMi0wNi0xNFQyMDoyMTo1Ny4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6ODg4NDgxOSwicmduIjoidXNlMSJ9.BUyi3WsoBlpPvCBms9WUKfOufKFDNz6onxBm8h_jWGo")
         
     },[])
@@ -38,19 +29,6 @@ function Home() {
 
     }
 
-    const signInWithGoogle = () =>{
-        const provider = new GoogleAuthProvider();
-        signInWithPopup(authentication, provider)
-        .then((res)=>{
-        
-          console.log(res);
-         
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
-    }
-
     console.log(lessons)
 
     return (
@@ -66,8 +44,8 @@ function Home() {
            
             
            </ListGroup> */}
-           <Button variant="outline-primary" onClick={signInWithGoogle}>Sign in as a TL employee</Button>{' '}
-            <Button variant="outline-secondary">Sign in as a PL participant</Button>{' '}
+           <Button variant="outline-primary">Sign in as a TL employee</Button>{' '}
+           <Button variant="outline-secondary">Sign in as a PL participant</Button>{' '}
         </div>
     )
 }

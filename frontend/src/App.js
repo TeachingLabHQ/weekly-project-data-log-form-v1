@@ -6,13 +6,6 @@ import Home from "./components/Home";
 import FormPage from "./components/FormPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AccessTokenProvider from "./contexts/accessTokenContext";
-import app from "./firebase/firebase";
-import {
-  getAuth,
-  signInWithPopup,
-  GoogleAuthProvider,
-  onAuthStateChanged,
-} from "firebase/auth";
 import React, { useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import { Helmet } from "react-helmet";
@@ -20,13 +13,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 
 function App() {
   const [isUserSignedIn, setIsUserSignedIn] = useState(false);
-  const authentication = getAuth(app);
-  onAuthStateChanged(authentication, (user) => {
-    if (user) {
-      return setIsUserSignedIn(true);
-    }
-    return setIsUserSignedIn(false);
-  });
+  
   return (
     <ChakraProvider>
       <div className="App">

@@ -1,18 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const db = require("./firebase");
 var fetch = require("node-fetch");
-
-const { getDocs, collection } = require("firebase/firestore");
-
-//firebase-not currently using
-router.get("/info", async (req, res, next) => {
-  const allDocData = [];
-  console.log(req.query.myParam);
-  const docs = await getDocs(collection(db, req.query.myParam));
-  docs.forEach((doc) => allDocData.push(doc.data()));
-  res.json({ result: allDocData });
-});
 
 //get data from Monday
 router.post("/getMonday", async (req, res, next) => {
